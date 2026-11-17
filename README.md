@@ -1,6 +1,7 @@
 # EuroSAT Land Use & Land Cover (LULC) Classification Benchmark
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Krishna2805/Eurosat-lulc-benchmark/blob/main/EuroSAT_Benchmark_Training.ipynb)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Benchmarks-FFD21E)](https://huggingface.co/Krishna2805/eurosat-benchmarks)
 [![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10+-orange.svg)](https://www.tensorflow.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
@@ -86,6 +87,7 @@ Eurosat-lulc-benchmark/
 ├── README.md                           # Project documentation & benchmark analysis
 ├── requirements.txt                    # Locked Python dependencies
 ├── app.py                             # Interactive Streamlit Web Application
+├── EuroSAT_Benchmark_Training.ipynb   # Unified Colab training pipeline with Hugging Face auto-sync
 ├── CNN_Swish_final.ipynb               # Custom Swish CNN training pipeline
 ├── ResNet_Finetune_Eurosat.ipynb       # ResNet50 fine-tuning pipeline
 ├── VGG16-model_final.ipynb             # VGG16 transfer learning notebook
@@ -97,6 +99,32 @@ Eurosat-lulc-benchmark/
 └── reports/                            # Formal project report
     └── Summary and Comparison Report.pdf
 ```
+
+---
+
+## ☁️ Hugging Face Model Weights & Google Colab Training
+
+Pretrained benchmark weights are hosted on the Hugging Face model repository:  
+👉 [**`Krishna2805/eurosat-benchmarks`**](https://huggingface.co/Krishna2805/eurosat-benchmarks)
+
+Hosted models include:
+- **`CNN_best_model.h5`**: Custom Swish CNN checkpoint
+- **`vgg16_eurosat_tfds_finetuned.h5`**: VGG16 transfer learning checkpoint
+- **`ResNet_best_model.h5`**: Fine-tuned ResNet50 checkpoint
+
+The Streamlit dashboard (`app.py`) automatically downloads any missing model weights from Hugging Face on demand via `ensure_eurosat_weight()`.
+
+**1-Line Verification Command:**
+```bash
+python -c "import app; p = app.ensure_eurosat_weight('CNN_best_model.h5'); print('EuroSAT model weights verified from Hugging Face:', p)"
+```
+
+### Google Colab GPU Training Workflow
+To train all three models from scratch on a free Google Colab T4 GPU:
+1. Click the **[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Krishna2805/Eurosat-lulc-benchmark/blob/main/EuroSAT_Benchmark_Training.ipynb)** badge at the top of this repository.
+2. Under Colab's menu, select **Runtime > Change runtime type > T4 GPU**.
+3. Set your Hugging Face write token in the notebook secrets/variable `HF_TOKEN`.
+4. Run all cells — the notebook will train Custom CNN, VGG16, and ResNet50, print the comparative evaluation matrix, and automatically push `.h5` model files to `Krishna2805/eurosat-benchmarks`.
 
 ---
 
@@ -131,7 +159,7 @@ streamlit run app.py
 ```
 Open your browser at `http://localhost:8501`. Use the sidebar to switch between the **Overview** page and the **Real-Time Predictions** interactive test harness.
 
-### 4. Running Model Training in Jupyter
+### 4. Running Model Training Locally (Jupyter)
 ```bash
 jupyter lab
 ```
