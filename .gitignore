@@ -55,15 +55,9 @@ datasets/
 tensorflow_datasets/
 ~/tensorflow_datasets/
 
-# Internal / Private Task, Issue, & Developer Notes
-ISSUES_TODO.md
-AUDIT_ISSUES.md
-.dev_notes.local.md
+# Local developer notes & scratch files
 *.local.md
 .*.local.md
-*DEFECT*
-*BACKLOG*
-*ISSUE*
 
 # OS-generated files
 .DS_Store
